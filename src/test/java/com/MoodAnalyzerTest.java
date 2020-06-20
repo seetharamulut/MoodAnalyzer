@@ -19,7 +19,19 @@ public class MoodAnalyzerTest {
     @Test
     public void WhenHappyMessage_shouldReturnHappy() {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer("null");
-        String actualMessage = moodAnalyzer.analyzeMood();
-        Assert.assertEquals("Happy", actualMessage);
+        try {
+            moodAnalyzer.analyzeMood();
+        } catch (MoodAnalyzerException ex) {
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.ENTERED_NULL, ex.exceptionType);
+        }
     }
+        @Test
+        public void WhenHappyMessage_ShouldReturnHappy() {
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer(" ");
+            try {
+                moodAnalyzer.analyzeMood();
+            } catch (MoodAnalyzerException ex) {
+                Assert.assertEquals(MoodAnalyzerException.ExceptionType.ENTERED_EMPTY, ex.exceptionType);
+            }
+        }
 }
